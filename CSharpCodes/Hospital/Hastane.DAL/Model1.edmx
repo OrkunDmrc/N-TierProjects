@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HastaneDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bolumler">
+          <Key>
+            <PropertyRef Name="BolumId" />
+          </Key>
+          <Property Name="BolumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doktorlar">
+          <Key>
+            <PropertyRef Name="DoktorId" />
+          </Key>
+          <Property Name="DoktorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumId" Type="int" Nullable="false" />
+          <Property Name="DoktorAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoktorSoyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoktorDogumTarihi" Type="date" Nullable="false" />
+          <Property Name="DoktorAdresi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoktorTel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hastalar">
+          <Key>
+            <PropertyRef Name="HastaId" />
+          </Key>
+          <Property Name="HastaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HastaTC" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HastaAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HastaSoyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HastaDogumTarihi" Type="date" Nullable="false" />
+          <Property Name="HastaAdresi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HastaTel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hemsireler">
+          <Key>
+            <PropertyRef Name="HemsireId" />
+          </Key>
+          <Property Name="HemsireId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumId" Type="int" Nullable="false" />
+          <Property Name="HemsireAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HemsireSoyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HemsireDogumTarihi" Type="date" Nullable="false" />
+          <Property Name="HemsireAdresi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HemsireTel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IdariPersonel">
+          <Key>
+            <PropertyRef Name="IdariPersonelId" />
+          </Key>
+          <Property Name="IdariPersonelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdariPersonelAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdariPersonelSoyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdariPersonelDogumTarihi" Type="date" Nullable="false" />
+          <Property Name="IdariPersonelAdresi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdariPersonelTel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IdariPersonellerDoktorlar">
+          <Key>
+            <PropertyRef Name="IdariPersonelId" />
+            <PropertyRef Name="DoktorId" />
+          </Key>
+          <Property Name="IdariPersonelId" Type="int" Nullable="false" />
+          <Property Name="DoktorId" Type="int" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Muayeneler">
+          <Key>
+            <PropertyRef Name="MuayeneId" />
+          </Key>
+          <Property Name="MuayeneId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HastaId" Type="int" Nullable="false" />
+          <Property Name="DoktorId" Type="int" Nullable="false" />
+          <Property Name="MuayeneTarihi" Type="date" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personeller">
+          <Key>
+            <PropertyRef Name="PersonelId" />
+          </Key>
+          <Property Name="PersonelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumId" Type="int" Nullable="false" />
+          <Property Name="PersonelAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonelSoyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonelDogumTarihi" Type="date" Nullable="false" />
+          <Property Name="PersonelAdresi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonelTel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Doktorlar_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Doktorlar" Type="Self.Doktorlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="BolumId" />
+            </Principal>
+            <Dependent Role="Doktorlar">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hemsireler_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Hemsireler" Type="Self.Hemsireler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="BolumId" />
+            </Principal>
+            <Dependent Role="Hemsireler">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdariPersonellerDoktorlar_Doktorlar">
+          <End Role="Doktorlar" Type="Self.Doktorlar" Multiplicity="1" />
+          <End Role="IdariPersonellerDoktorlar" Type="Self.IdariPersonellerDoktorlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorlar">
+              <PropertyRef Name="DoktorId" />
+            </Principal>
+            <Dependent Role="IdariPersonellerDoktorlar">
+              <PropertyRef Name="DoktorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdariPersonellerDoktorlar_IdariPersonel">
+          <End Role="IdariPersonel" Type="Self.IdariPersonel" Multiplicity="1" />
+          <End Role="IdariPersonellerDoktorlar" Type="Self.IdariPersonellerDoktorlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdariPersonel">
+              <PropertyRef Name="IdariPersonelId" />
+            </Principal>
+            <Dependent Role="IdariPersonellerDoktorlar">
+              <PropertyRef Name="IdariPersonelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muayeneler_Doktorlar">
+          <End Role="Doktorlar" Type="Self.Doktorlar" Multiplicity="1" />
+          <End Role="Muayeneler" Type="Self.Muayeneler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorlar">
+              <PropertyRef Name="DoktorId" />
+            </Principal>
+            <Dependent Role="Muayeneler">
+              <PropertyRef Name="DoktorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muayeneler_Hastalar">
+          <End Role="Hastalar" Type="Self.Hastalar" Multiplicity="1" />
+          <End Role="Muayeneler" Type="Self.Muayeneler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastalar">
+              <PropertyRef Name="HastaId" />
+            </Principal>
+            <Dependent Role="Muayeneler">
+              <PropertyRef Name="HastaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personeller_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Personeller" Type="Self.Personeller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="BolumId" />
+            </Principal>
+            <Dependent Role="Personeller">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HastaneDBModelStoreContainer">
+          <EntitySet Name="Bolumler" EntityType="Self.Bolumler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doktorlar" EntityType="Self.Doktorlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hastalar" EntityType="Self.Hastalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hemsireler" EntityType="Self.Hemsireler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IdariPersonel" EntityType="Self.IdariPersonel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IdariPersonellerDoktorlar" EntityType="Self.IdariPersonellerDoktorlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Muayeneler" EntityType="Self.Muayeneler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personeller" EntityType="Self.Personeller" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Doktorlar_Bolumler" Association="Self.FK_Doktorlar_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Doktorlar" EntitySet="Doktorlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hemsireler_Bolumler" Association="Self.FK_Hemsireler_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Hemsireler" EntitySet="Hemsireler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdariPersonellerDoktorlar_Doktorlar" Association="Self.FK_IdariPersonellerDoktorlar_Doktorlar">
+            <End Role="Doktorlar" EntitySet="Doktorlar" />
+            <End Role="IdariPersonellerDoktorlar" EntitySet="IdariPersonellerDoktorlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdariPersonellerDoktorlar_IdariPersonel" Association="Self.FK_IdariPersonellerDoktorlar_IdariPersonel">
+            <End Role="IdariPersonel" EntitySet="IdariPersonel" />
+            <End Role="IdariPersonellerDoktorlar" EntitySet="IdariPersonellerDoktorlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muayeneler_Doktorlar" Association="Self.FK_Muayeneler_Doktorlar">
+            <End Role="Doktorlar" EntitySet="Doktorlar" />
+            <End Role="Muayeneler" EntitySet="Muayeneler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muayeneler_Hastalar" Association="Self.FK_Muayeneler_Hastalar">
+            <End Role="Hastalar" EntitySet="Hastalar" />
+            <End Role="Muayeneler" EntitySet="Muayeneler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personeller_Bolumler" Association="Self.FK_Personeller_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Personeller" EntitySet="Personeller" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HastaneDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bolumler">
+          <Key>
+            <PropertyRef Name="BolumId" />
+          </Key>
+          <Property Name="BolumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Doktorlar" Relationship="Self.FK_Doktorlar_Bolumler" FromRole="Bolumler" ToRole="Doktorlar" />
+          <NavigationProperty Name="Hemsireler" Relationship="Self.FK_Hemsireler_Bolumler" FromRole="Bolumler" ToRole="Hemsireler" />
+          <NavigationProperty Name="Personeller" Relationship="Self.FK_Personeller_Bolumler" FromRole="Bolumler" ToRole="Personeller" />
+        </EntityType>
+        <EntityType Name="Doktorlar">
+          <Key>
+            <PropertyRef Name="DoktorId" />
+          </Key>
+          <Property Name="DoktorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumId" Type="Int32" Nullable="false" />
+          <Property Name="DoktorAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoktorSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoktorDogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DoktorAdresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoktorTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.FK_Doktorlar_Bolumler" FromRole="Doktorlar" ToRole="Bolumler" />
+          <NavigationProperty Name="IdariPersonellerDoktorlar" Relationship="Self.FK_IdariPersonellerDoktorlar_Doktorlar" FromRole="Doktorlar" ToRole="IdariPersonellerDoktorlar" />
+          <NavigationProperty Name="Muayeneler" Relationship="Self.FK_Muayeneler_Doktorlar" FromRole="Doktorlar" ToRole="Muayeneler" />
+        </EntityType>
+        <EntityType Name="Hastalar">
+          <Key>
+            <PropertyRef Name="HastaId" />
+          </Key>
+          <Property Name="HastaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HastaTC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HastaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HastaSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HastaDogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HastaAdresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HastaTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Muayeneler" Relationship="Self.FK_Muayeneler_Hastalar" FromRole="Hastalar" ToRole="Muayeneler" />
+        </EntityType>
+        <EntityType Name="Hemsireler">
+          <Key>
+            <PropertyRef Name="HemsireId" />
+          </Key>
+          <Property Name="HemsireId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumId" Type="Int32" Nullable="false" />
+          <Property Name="HemsireAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HemsireSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HemsireDogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HemsireAdresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HemsireTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.FK_Hemsireler_Bolumler" FromRole="Hemsireler" ToRole="Bolumler" />
+        </EntityType>
+        <EntityType Name="IdariPersonel">
+          <Key>
+            <PropertyRef Name="IdariPersonelId" />
+          </Key>
+          <Property Name="IdariPersonelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdariPersonelAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdariPersonelSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdariPersonelDogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdariPersonelAdresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdariPersonelTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="IdariPersonellerDoktorlar" Relationship="Self.FK_IdariPersonellerDoktorlar_IdariPersonel" FromRole="IdariPersonel" ToRole="IdariPersonellerDoktorlar" />
+        </EntityType>
+        <EntityType Name="IdariPersonellerDoktorlar">
+          <Key>
+            <PropertyRef Name="IdariPersonelId" />
+            <PropertyRef Name="DoktorId" />
+          </Key>
+          <Property Name="IdariPersonelId" Type="Int32" Nullable="false" />
+          <Property Name="DoktorId" Type="Int32" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Doktorlar" Relationship="Self.FK_IdariPersonellerDoktorlar_Doktorlar" FromRole="IdariPersonellerDoktorlar" ToRole="Doktorlar" />
+          <NavigationProperty Name="IdariPersonel" Relationship="Self.FK_IdariPersonellerDoktorlar_IdariPersonel" FromRole="IdariPersonellerDoktorlar" ToRole="IdariPersonel" />
+        </EntityType>
+        <EntityType Name="Muayeneler">
+          <Key>
+            <PropertyRef Name="MuayeneId" />
+          </Key>
+          <Property Name="MuayeneId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HastaId" Type="Int32" Nullable="false" />
+          <Property Name="DoktorId" Type="Int32" Nullable="false" />
+          <Property Name="MuayeneTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Doktorlar" Relationship="Self.FK_Muayeneler_Doktorlar" FromRole="Muayeneler" ToRole="Doktorlar" />
+          <NavigationProperty Name="Hastalar" Relationship="Self.FK_Muayeneler_Hastalar" FromRole="Muayeneler" ToRole="Hastalar" />
+        </EntityType>
+        <EntityType Name="Personeller">
+          <Key>
+            <PropertyRef Name="PersonelId" />
+          </Key>
+          <Property Name="PersonelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumId" Type="Int32" Nullable="false" />
+          <Property Name="PersonelAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonelSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonelDogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PersonelAdresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonelTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.FK_Personeller_Bolumler" FromRole="Personeller" ToRole="Bolumler" />
+        </EntityType>
+        <Association Name="FK_Doktorlar_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Doktorlar" Type="Self.Doktorlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="BolumId" />
+            </Principal>
+            <Dependent Role="Doktorlar">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hemsireler_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Hemsireler" Type="Self.Hemsireler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="BolumId" />
+            </Principal>
+            <Dependent Role="Hemsireler">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personeller_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="1" />
+          <End Role="Personeller" Type="Self.Personeller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="BolumId" />
+            </Principal>
+            <Dependent Role="Personeller">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdariPersonellerDoktorlar_Doktorlar">
+          <End Role="Doktorlar" Type="Self.Doktorlar" Multiplicity="1" />
+          <End Role="IdariPersonellerDoktorlar" Type="Self.IdariPersonellerDoktorlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorlar">
+              <PropertyRef Name="DoktorId" />
+            </Principal>
+            <Dependent Role="IdariPersonellerDoktorlar">
+              <PropertyRef Name="DoktorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muayeneler_Doktorlar">
+          <End Role="Doktorlar" Type="Self.Doktorlar" Multiplicity="1" />
+          <End Role="Muayeneler" Type="Self.Muayeneler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorlar">
+              <PropertyRef Name="DoktorId" />
+            </Principal>
+            <Dependent Role="Muayeneler">
+              <PropertyRef Name="DoktorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muayeneler_Hastalar">
+          <End Role="Hastalar" Type="Self.Hastalar" Multiplicity="1" />
+          <End Role="Muayeneler" Type="Self.Muayeneler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hastalar">
+              <PropertyRef Name="HastaId" />
+            </Principal>
+            <Dependent Role="Muayeneler">
+              <PropertyRef Name="HastaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdariPersonellerDoktorlar_IdariPersonel">
+          <End Role="IdariPersonel" Type="Self.IdariPersonel" Multiplicity="1" />
+          <End Role="IdariPersonellerDoktorlar" Type="Self.IdariPersonellerDoktorlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdariPersonel">
+              <PropertyRef Name="IdariPersonelId" />
+            </Principal>
+            <Dependent Role="IdariPersonellerDoktorlar">
+              <PropertyRef Name="IdariPersonelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HastaneDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bolumler" EntityType="Self.Bolumler" />
+          <EntitySet Name="Doktorlar" EntityType="Self.Doktorlar" />
+          <EntitySet Name="Hastalar" EntityType="Self.Hastalar" />
+          <EntitySet Name="Hemsireler" EntityType="Self.Hemsireler" />
+          <EntitySet Name="IdariPersonel" EntityType="Self.IdariPersonel" />
+          <EntitySet Name="IdariPersonellerDoktorlar" EntityType="Self.IdariPersonellerDoktorlar" />
+          <EntitySet Name="Muayeneler" EntityType="Self.Muayeneler" />
+          <EntitySet Name="Personeller" EntityType="Self.Personeller" />
+          <AssociationSet Name="FK_Doktorlar_Bolumler" Association="Self.FK_Doktorlar_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Doktorlar" EntitySet="Doktorlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hemsireler_Bolumler" Association="Self.FK_Hemsireler_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Hemsireler" EntitySet="Hemsireler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personeller_Bolumler" Association="Self.FK_Personeller_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Personeller" EntitySet="Personeller" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdariPersonellerDoktorlar_Doktorlar" Association="Self.FK_IdariPersonellerDoktorlar_Doktorlar">
+            <End Role="Doktorlar" EntitySet="Doktorlar" />
+            <End Role="IdariPersonellerDoktorlar" EntitySet="IdariPersonellerDoktorlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muayeneler_Doktorlar" Association="Self.FK_Muayeneler_Doktorlar">
+            <End Role="Doktorlar" EntitySet="Doktorlar" />
+            <End Role="Muayeneler" EntitySet="Muayeneler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muayeneler_Hastalar" Association="Self.FK_Muayeneler_Hastalar">
+            <End Role="Hastalar" EntitySet="Hastalar" />
+            <End Role="Muayeneler" EntitySet="Muayeneler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdariPersonellerDoktorlar_IdariPersonel" Association="Self.FK_IdariPersonellerDoktorlar_IdariPersonel">
+            <End Role="IdariPersonel" EntitySet="IdariPersonel" />
+            <End Role="IdariPersonellerDoktorlar" EntitySet="IdariPersonellerDoktorlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HastaneDBModelStoreContainer" CdmEntityContainer="HastaneDBEntities">
+          <EntitySetMapping Name="Bolumler">
+            <EntityTypeMapping TypeName="HastaneDBModel.Bolumler">
+              <MappingFragment StoreEntitySet="Bolumler">
+                <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+                <ScalarProperty Name="BolumAdi" ColumnName="BolumAdi" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doktorlar">
+            <EntityTypeMapping TypeName="HastaneDBModel.Doktorlar">
+              <MappingFragment StoreEntitySet="Doktorlar">
+                <ScalarProperty Name="DoktorId" ColumnName="DoktorId" />
+                <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+                <ScalarProperty Name="DoktorAdi" ColumnName="DoktorAdi" />
+                <ScalarProperty Name="DoktorSoyadi" ColumnName="DoktorSoyadi" />
+                <ScalarProperty Name="DoktorDogumTarihi" ColumnName="DoktorDogumTarihi" />
+                <ScalarProperty Name="DoktorAdresi" ColumnName="DoktorAdresi" />
+                <ScalarProperty Name="DoktorTel" ColumnName="DoktorTel" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hastalar">
+            <EntityTypeMapping TypeName="HastaneDBModel.Hastalar">
+              <MappingFragment StoreEntitySet="Hastalar">
+                <ScalarProperty Name="HastaId" ColumnName="HastaId" />
+                <ScalarProperty Name="HastaTC" ColumnName="HastaTC" />
+                <ScalarProperty Name="HastaAdi" ColumnName="HastaAdi" />
+                <ScalarProperty Name="HastaSoyadi" ColumnName="HastaSoyadi" />
+                <ScalarProperty Name="HastaDogumTarihi" ColumnName="HastaDogumTarihi" />
+                <ScalarProperty Name="HastaAdresi" ColumnName="HastaAdresi" />
+                <ScalarProperty Name="HastaTel" ColumnName="HastaTel" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hemsireler">
+            <EntityTypeMapping TypeName="HastaneDBModel.Hemsireler">
+              <MappingFragment StoreEntitySet="Hemsireler">
+                <ScalarProperty Name="HemsireId" ColumnName="HemsireId" />
+                <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+                <ScalarProperty Name="HemsireAdi" ColumnName="HemsireAdi" />
+                <ScalarProperty Name="HemsireSoyadi" ColumnName="HemsireSoyadi" />
+                <ScalarProperty Name="HemsireDogumTarihi" ColumnName="HemsireDogumTarihi" />
+                <ScalarProperty Name="HemsireAdresi" ColumnName="HemsireAdresi" />
+                <ScalarProperty Name="HemsireTel" ColumnName="HemsireTel" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IdariPersonel">
+            <EntityTypeMapping TypeName="HastaneDBModel.IdariPersonel">
+              <MappingFragment StoreEntitySet="IdariPersonel">
+                <ScalarProperty Name="IdariPersonelId" ColumnName="IdariPersonelId" />
+                <ScalarProperty Name="IdariPersonelAdi" ColumnName="IdariPersonelAdi" />
+                <ScalarProperty Name="IdariPersonelSoyadi" ColumnName="IdariPersonelSoyadi" />
+                <ScalarProperty Name="IdariPersonelDogumTarihi" ColumnName="IdariPersonelDogumTarihi" />
+                <ScalarProperty Name="IdariPersonelAdresi" ColumnName="IdariPersonelAdresi" />
+                <ScalarProperty Name="IdariPersonelTel" ColumnName="IdariPersonelTel" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IdariPersonellerDoktorlar">
+            <EntityTypeMapping TypeName="HastaneDBModel.IdariPersonellerDoktorlar">
+              <MappingFragment StoreEntitySet="IdariPersonellerDoktorlar">
+                <ScalarProperty Name="IdariPersonelId" ColumnName="IdariPersonelId" />
+                <ScalarProperty Name="DoktorId" ColumnName="DoktorId" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Muayeneler">
+            <EntityTypeMapping TypeName="HastaneDBModel.Muayeneler">
+              <MappingFragment StoreEntitySet="Muayeneler">
+                <ScalarProperty Name="MuayeneId" ColumnName="MuayeneId" />
+                <ScalarProperty Name="HastaId" ColumnName="HastaId" />
+                <ScalarProperty Name="DoktorId" ColumnName="DoktorId" />
+                <ScalarProperty Name="MuayeneTarihi" ColumnName="MuayeneTarihi" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personeller">
+            <EntityTypeMapping TypeName="HastaneDBModel.Personeller">
+              <MappingFragment StoreEntitySet="Personeller">
+                <ScalarProperty Name="PersonelId" ColumnName="PersonelId" />
+                <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+                <ScalarProperty Name="PersonelAdi" ColumnName="PersonelAdi" />
+                <ScalarProperty Name="PersonelSoyadi" ColumnName="PersonelSoyadi" />
+                <ScalarProperty Name="PersonelDogumTarihi" ColumnName="PersonelDogumTarihi" />
+                <ScalarProperty Name="PersonelAdresi" ColumnName="PersonelAdresi" />
+                <ScalarProperty Name="PersonelTel" ColumnName="PersonelTel" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="6926fd5948cf4dbb9215bcde2c2f06f7" Name="Diagram1">
+        <EntityTypeShape EntityType="HastaneDBModel.Bolumler" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneDBModel.Doktorlar" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneDBModel.Hastalar" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneDBModel.Hemsireler" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneDBModel.IdariPersonel" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneDBModel.IdariPersonellerDoktorlar" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneDBModel.Muayeneler" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneDBModel.Personeller" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="HastaneDBModel.FK_Doktorlar_Bolumler" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneDBModel.FK_Hemsireler_Bolumler" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneDBModel.FK_Personeller_Bolumler" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneDBModel.FK_IdariPersonellerDoktorlar_Doktorlar" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneDBModel.FK_Muayeneler_Doktorlar" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneDBModel.FK_Muayeneler_Hastalar" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneDBModel.FK_IdariPersonellerDoktorlar_IdariPersonel" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
