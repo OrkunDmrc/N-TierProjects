@@ -2,7 +2,7 @@
 There are three different example
 
 ## Features
-1. CRUD operations three databases with gerated repositories.
+1. CRUD operations three databases with generate repositories.
 2. Layered as Buissness, WinUI and DataAccess.
 3. Simple to understand architecture and operations.
 4. Used MS-SQL as DBFirst
